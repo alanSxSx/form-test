@@ -1,22 +1,28 @@
 "use client";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { date } from "zod";
+import {z} from "zod"
+import { zodResolver } from '@hookform/resolvers/zod';
 
-type ProductData = {
-  nameProduct: string;
-  priceProduct: number;
-};
+type ProductData = z.infer<typeof ProductData2 >
+
+const ProductData2 = z.object({
+	nameProduct: z.string(),
+  priceProduct: z.number()
+})
 
 export default function Home() {
   const [products, setProducts] = useState<ProductData[]>([]);
 
   const {
     register,
-    setValue,
     handleSubmit,
     formState: { errors },
-  } = useForm<ProductData>();
+  } = useForm<ProductData>({
+		resolver:zodResolver(ProductData2)
+	})
+
+
   const onSubmit = handleSubmit((data) =>
     setProducts((prevProducts) => [...prevProducts, data])
   );

@@ -69,7 +69,7 @@ export default function Home() {
               <strong className="flex justify-center items-center">
                 {product.nameProduct}
               </strong>
-              R$ {product.priceProduct}
+              R$ {product.priceProduct }
               <button className="p-1 border border-black text-blue-500">
                 Excluir
               </button>
